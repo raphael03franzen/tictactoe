@@ -4,15 +4,10 @@ package tictactoe;
 public class Main {
 
 	public static void main(String[] args) {
-		Game game = new Game(0b001_010_001,0b100_100_100);
-		
-		
+		@SuppressWarnings("unused")
+		Game game = new Game(0b001_010_001, 0b100_100_100);
+
 	}
-
-	@SuppressWarnings("unused")
-	
-
-	
 
 	final static int lookup(int n) {
 		switch (n) {

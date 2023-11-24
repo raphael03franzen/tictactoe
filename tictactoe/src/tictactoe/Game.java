@@ -33,12 +33,12 @@ public class Game {
 		}
 		updateGamestate();
 
-		switch(checkWin()){
-		case 1://A Wins
+		switch (checkWin()) {
+		case 1:// A Wins
 			print();
 			System.out.println("In this Possition , X winns.");
 			break;
-		case 2://B Wins
+		case 2:// B Wins
 			print();
 			System.out.println("In this Possition , O winns.");
 			break;
@@ -113,21 +113,22 @@ public class Game {
 		Gamestate = getPlayer_A() | getPlayer_B();
 	}
 
-	protected final int checkWin() {//XXX
+	protected final int checkWin() {// XXX
 		if ((Player_A & top_row) == top_row | (Player_A & middle_row) == middle_row
 				| (Player_A & bottom_row) == bottom_row | (Player_A & left_collumn) == left_collumn
 				| (Player_A & middle_collumn) == middle_collumn | (Player_A & right_collumn) == right_collumn
-				| (Player_A & left_diagonal) == left_diagonal|(Player_A&right_collumn)==right_collumn) {
-				return 1;
+				| (Player_A & left_diagonal) == left_diagonal | (Player_A & right_collumn) == right_collumn) {
+			return 1;
 		}
 		if ((Player_B & top_row) == top_row | (Player_B & middle_row) == middle_row
 				| (Player_B & bottom_row) == bottom_row | (Player_B & left_collumn) == left_collumn
 				| (Player_B & middle_collumn) == middle_collumn | (Player_B & right_collumn) == right_collumn
-				| (Player_B & left_diagonal) == left_diagonal|(Player_B&right_collumn)==right_collumn) {
-				return 2;
+				| (Player_B & left_diagonal) == left_diagonal | (Player_B & right_collumn) == right_collumn) {
+			return 2;
 		}
 		return 0;
 	}
+
 	protected void print() {
 		print(this.getPlayer_A(), this.getPlayer_B());
 	}
