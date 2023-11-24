@@ -4,26 +4,15 @@ package tictactoe;
 public class Main {
 
 	public static void main(String[] args) {
-
-		print(0b000101000, 0b101000101);
-
+		Game game = new Game(0b001_010_001,0b100_100_100);
+		
+		
 	}
 
 	@SuppressWarnings("unused")
-	private static void print(Game g) {
-		print(g.getPlayer_A(), g.getPlayer_B());
-	}
+	
 
-	private static void print(int Player_A, int Player_B) {
-
-		for (int y = 1; y <= 3; y++) {
-			for (int x = 1; x <= 3; x++) {
-				int k = lookup(x + 3 * (y - 1));
-				System.out.print((Player_A & k) == k ? "X" : (Player_B & k) == k ? "O" : "_");
-			}
-			System.out.println();
-		}
-	}
+	
 
 	final static int lookup(int n) {
 		switch (n) {
