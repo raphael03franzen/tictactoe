@@ -32,7 +32,7 @@ public class Game {
 					+ " detected:A Cell can only be used by one Player");
 		}
 		updateGamestate();
-		
+
 		switch(checkWin()){
 		case 1://A Wins
 			print();
@@ -43,7 +43,7 @@ public class Game {
 			System.out.println("In this Possition , O winns.");
 			break;
 		}
-		
+
 	}
 
 	final int lookup(int n) { // translates grid positions to binary index
@@ -131,7 +131,7 @@ public class Game {
 	protected void print() {
 		print(this.getPlayer_A(), this.getPlayer_B());
 	}
-	
+
 	protected void print(int A, int B) {
 
 		for (int y = 1; y <= 3; y++) {
