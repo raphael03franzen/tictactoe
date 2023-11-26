@@ -1,37 +1,33 @@
-
 package tictactoe;
 
+import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		@SuppressWarnings("unused")
-		Game game = new Game(0b001_010_001, 0b100_100_100);
-
+		Scanner sc = new Scanner(System.in);
+		Game game = new Game();
+	
+	
+	int next;
+	for(int i = 0;game.checkWin()==0&&(game.getGamestate()<0b111_111_111);i++){
+		
+		System.out.print((i%2==0)?"Player A:":"Player B:");
+		next = sc.nextInt();
+		game.Play(i%2,next);
 	}
-
-	final static int lookup(int n) {
-		switch (n) {
+	switch (game.checkWin()) {
+		case 0:
+			System.out.println("Draw!");
+			break;
 		case 1:
-			return 1;
+			System.out.println("Player A Winns!Congratulations");
+			break;
 		case 2:
-			return 2;
-		case 3:
-			return 4;
-		case 4:
-			return 8;
-		case 5:
-			return 16;
-		case 6:
-			return 32;
-		case 7:
-			return 64;
-		case 8:
-			return 128;
-		case 9:
-			return 256;
-		default:
-			throw new IllegalArgumentException("Input must be 1,2,3,4,5,6,7,8 or 9");
-		}
+			System.out.println("Player B Winns!Congratulations");
+			break;
 	}
+	sc.close();
+	}
+
 
 }
