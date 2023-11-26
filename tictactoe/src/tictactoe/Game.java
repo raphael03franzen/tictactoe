@@ -1,19 +1,20 @@
 package tictactoe;
 
 public class Game {
-	private boolean debug = false;
+
 	private int Player_A = 0;
 	private int Player_B = 0;
 	private int Gamestate = 0;
 	// Winning Scenarios
-	int top_row = lookup(1) + lookup(2) + lookup(3);
-	int middle_row = lookup(4) + lookup(5) + lookup(6);
-	int bottom_row = lookup(7) + lookup(8) + lookup(9);
-	int left_collumn = lookup(1) + lookup(4) + lookup(7);
-	int middle_collumn = lookup(2) + lookup(5) + lookup(8);
-	int right_collumn = lookup(3) + lookup(6) + lookup(9);
-	int left_diagonal = lookup(1) + lookup(5) + lookup(9);
-	int right_diagoal = lookup(3) + lookup(5) + lookup(7);
+
+	int top_row = 7;// lookup(1) + lookup(2) + lookup(3);
+	int middle_row = 56;// lookup(4) + lookup(5) + lookup(6);
+	int bottom_row = 448;// lookup(7) + lookup(8) + lookup(9);
+	int left_collumn = 73;// lookup(1) + lookup(4) + lookup(7);
+	int middle_collumn = 146;// lookup(2) + lookup(5) + lookup(8);
+	int right_collumn = 292;// lookup(3) + lookup(6) + lookup(9);
+	int left_diagonal = 273;// lookup(1) + lookup(5) + lookup(9);
+	int right_diagoal = 84;// lookup(3) + lookup(5) + lookup(7);
 
 	// remember: binary output is "reverse" so 0b0100 would be the 3rd Cell
 
@@ -44,6 +45,27 @@ public class Game {
 			break;
 		}
 
+	}
+
+	public void test() {
+		print(top_row);
+		print(middle_row);
+		print(bottom_row);
+		print(left_collumn);
+		print(middle_collumn);
+		print(right_collumn);
+		print(left_diagonal);
+		print(right_diagoal);
+		
+		System.out.println("top_row:"+checkWin(top_row));
+		System.out.println("middle_row:"+checkWin(middle_row));
+		System.out.println("bottom_row:"+checkWin(bottom_row));
+		System.out.println("left_collumn:"+checkWin(left_collumn));
+		System.out.println("middle_collumn:"+checkWin(middle_collumn));
+		System.out.println("right_collumn:"+checkWin(right_collumn));
+		System.out.println("left_diagonal:"+checkWin(left_diagonal));
+		System.out.println("right_diagoal:"+checkWin(right_diagoal));
+		
 	}
 
 	final int lookup(int n) { // translates grid positions to binary index
@@ -113,17 +135,22 @@ public class Game {
 		Gamestate = getPlayer_A() | getPlayer_B();
 	}
 
+	protected final boolean checkWin(int Player) {
+		return (   Player & top_row) == top_row 
+				| (Player & middle_row) == middle_row 
+				| (Player & bottom_row) == bottom_row
+				| (Player & left_collumn) == left_collumn 
+				| (Player & middle_collumn) == middle_collumn
+				| (Player & right_collumn) == right_collumn 
+				| (Player & left_diagonal) == left_diagonal
+				| (Player & right_diagoal) == right_diagoal;
+	}
+
 	protected final int checkWin() {// XXX
-		if ((Player_A & top_row) == top_row | (Player_A & middle_row) == middle_row
-				| (Player_A & bottom_row) == bottom_row | (Player_A & left_collumn) == left_collumn
-				| (Player_A & middle_collumn) == middle_collumn | (Player_A & right_collumn) == right_collumn
-				| (Player_A & left_diagonal) == left_diagonal | (Player_A & right_collumn) == right_collumn) {
+		if (checkWin(Player_A)) {
 			return 1;
 		}
-		if ((Player_B & top_row) == top_row | (Player_B & middle_row) == middle_row
-				| (Player_B & bottom_row) == bottom_row | (Player_B & left_collumn) == left_collumn
-				| (Player_B & middle_collumn) == middle_collumn | (Player_B & right_collumn) == right_collumn
-				| (Player_B & left_diagonal) == left_diagonal | (Player_B & right_collumn) == right_collumn) {
+		if (checkWin(Player_B)) {
 			return 2;
 		}
 		return 0;
@@ -131,6 +158,10 @@ public class Game {
 
 	protected void print() {
 		print(this.getPlayer_A(), this.getPlayer_B());
+	}
+
+	protected void print(int A) {
+		print(A, 0);
 	}
 
 	protected void print(int A, int B) {
@@ -142,6 +173,7 @@ public class Game {
 			}
 			System.out.println();
 		}
+		System.out.println();
 	}
 	// Index: Number between 1 and 9 identifying a Cell
 
@@ -154,7 +186,6 @@ public class Game {
 			} else {
 				Player_B += lookup(index);
 			}
-			System.out.println(debug ? player + " played " + index : "");
 			updateGamestate();
 			print();
 		}
