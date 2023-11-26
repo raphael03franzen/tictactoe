@@ -143,26 +143,20 @@ public class Game {
 			System.out.println();
 		}
 	}
-
 	// Index: Number between 1 and 9 identifying a Cell
 
-	protected void Play(int Player_id,int index){
+	protected void Play(boolean player, int index) {
 		if ((Gamestate & lookup(index)) != 0) {
 			throw new IllegalArgumentException("Invalid:Space already in use");
 		} else {
-			switch(Player_id){
-				case 0:
-					Player_A += lookup(index);
-					break;
-				case 1:
-					Player_B += lookup(index);
-					break;
+			if (player) {
+				Player_A += lookup(index);
+			} else {
+				Player_B += lookup(index);
 			}
-			System.out.println(debug ? Player_id + " played " + index : "");
+			System.out.println(debug ? player + " played " + index : "");
 			updateGamestate();
 			print();
 		}
 	}
-
-
 }
